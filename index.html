@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子保函综合服务平台</title>
+    <!-- 引入样式库 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <!-- 在其他样式表之后添加 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 遮罩层 -->
+    <div id="chatOverlay" class="chat-overlay"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="./imgs/logo.png" alt="Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">首页</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            产品中心
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#products">工程投标保函</a></li>
+                            <li><a class="dropdown-item" href="#products">合同履约保函</a></li>
+                            <li><a class="dropdown-item" href="#products">工程预付款保函</a></li>
+                            <li><a class="dropdown-item" href="#products">业主支付保函</a></li>
+                            <li><a class="dropdown-item" href="#products">农民工工资支付保函</a></li>
+                            <li><a class="dropdown-item" href="#products">工程质量保函</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">企业简介</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#advantages">平台优势</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">联系我们</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#partners">合作伙伴</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary ms-2" onclick="openAIChat()">AI智能助手</button>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://as.tianhebao.com/login" target="_blank" class="btn btn-outline-primary ms-2">登录</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="btn btn-outline-secondary ms-2">管理登录</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- AI聊天窗口 -->
+    <div id="aiChatWindow" class="chat-window">
+        <div class="chat-header">
+            <h5>AI智能助手</h5>
+            <div class="header-buttons">
+                <button class="btn btn-outline-light btn-sm me-2" onclick="switchToCustomerService()">
+                    <i class="fas fa-headset"></i> 在线客服
+                </button>
+                <button class="close-btn" onclick="closeAIChat()">&times;</button>
+            </div>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="请输入您的问题...">
+            <button onclick="sendMessage()">发送</button>
+        </div>
+    </div>
+
+    <!-- 其他页面内容将在这里添加 -->
+
+    <!-- 首页轮播图 -->
+    <section id="home" class="carousel slide" data-bs-ride="carousel">
+        <!-- 修改轮播指示器 -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#home" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#home" data-bs-slide-to="1"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./imgs/banner-1.jpg" class="d-block w-100" alt="电子保函服务">
+            </div>
+            <div class="carousel-item">
+                <img src="./imgs/banner-2.jpg" class="d-block w-100" alt="全流程服务">
+            </div>
+        </div>
+
+        <!-- 添加轮播控制按钮 -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#home" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#home" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </section>
+
+    <!-- 修改滚动信息条结构 -->
+    <div class="news-ticker">
+        <div class="news-ticker-container">
+            <div class="news-ticker-wrapper">
+                <div id="tickerContent" class="ticker-content"></div>
+                <div id="tickerContent2" class="ticker-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 产品中心 -->
+    <section id="products" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">产品中心</h2>
+            <div class="row">
+                <!-- 工程投标保函 -->
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <div class="product-card">
+                        <div class="product-header">
+                            <h5 class="product-title">工程投标保函</h5>
+                            <a href="#" class="more-link">更多</a>
+                        </div>
+                        <div class="product-badge">
+                            <span><i class="fas fa-clock"></i> 24H在线</span>
+                            <span><i class="fas fa-bolt"></i> 秒出函</span>
+                        </div>
+                        <p class="product-text">投标人购买投标保函等同于缴纳投标保证金，是在通过招标方式成交的工程建造项目中，投标方为响应招标方的要求，向保证人申请出具的保函，保证投标方履行招标文件的一种保函</p>
+                        <button class="btn btn-primary w-100" onclick="openAIChat()">在线申请</button>
+                    </div>
+                </div>
+
+                <!-- 合同履约保函 -->
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-card">
+                        <div class="product-header">
+                            <h5 class="product-title">合同履约保函</h5>
+                            <a href="#" class="more-link">更多</a>
+                        </div>
+                        <div class="product-badge">
+                            <span><i class="fas fa-clock"></i> 24H在线</span>
+                            <span><i class="fas fa-bolt"></i> 秒出函</span>
+                        </div>
+                        <p class="product-text">向建设工程发包人提供的保证承包人履行建设合同义务的保函，是担保人应被保证人申请向工程承包项目中的业主出具的保证被保证人严格按照合同约定全面和实际地履行其合同责任和义务的一种保函</p>
+                        <button class="btn btn-primary w-100" onclick="openAIChat()">在线申请</button>
+                    </div>
+                </div>
+
+                <!-- 工程预付款保函 -->
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-card">
+                        <div class="product-header">
+                            <h5 class="product-title">工程预付款保函</h5>
+                            <a href="#" class="more-link">更多</a>
+                        </div>
+                        <div class="product-badge">
+                            <span><i class="fas fa-clock"></i> 24H在线</span>
+                            <span><i class="fas fa-bolt"></i> 秒出函</span>
+                        </div>
+                        <p class="product-text">是指保证人为承包方向发包方提供的，在发包方预先支付一定数额款项以供包方周转使用后，保证承包方在收到预付后按施工合同约定专款专用的一种担保</p>
+                        <button class="btn btn-primary w-100" onclick="openAIChat()">在线申请</button>
+                    </div>
+                </div>
+
+                <!-- 业主支付保函 -->
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <div class="product-card">
+                        <div class="product-header">
+                            <h5 class="product-title">业主支付保函</h5>
+                            <a href="#" class="more-link">更多</a>
+                        </div>
+                        <div class="product-badge">
+                            <span><i class="fas fa-clock"></i> 24H在线</span>
+                            <span><i class="fas fa-bolt"></i> 秒出函</span>
+                        </div>
+                        <p class="product-text">是指由金融机构向承包商保证业主按照合同约定如期向承包商支付工程款，若业主违约，由金融机构代为偿付的一种担保。金融机构赔偿后，可向业主进行追偿</p>
+                        <button class="btn btn-primary w-100" onclick="openAIChat()">在线申请</button>
+                    </div>
+                </div>
+
+                <!-- 农民工工资支付保函 -->
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-card">
+                        <div class="product-header">
+                            <h5 class="product-title">农民工工资支付保函</h5>
+                            <a href="#" class="more-link">更多</a>
+                        </div>
+                        <div class="product-badge">
+                            <span><i class="fas fa-clock"></i> 24H在线</span>
+                            <span><i class="fas fa-bolt"></i> 秒出函</span>
+                        </div>
+                        <p class="product-text">是指在建筑工程项目中为保证建设单位如期履行农民工工资支付义务，由担保人为设单位向监管人提供的，保证建设单位如期履行农民工工资支付义务的担保</p>
+                        <button class="btn btn-primary w-100" onclick="openAIChat()">在线申请</button>
+                    </div>
+                </div>
+
+                <!-- 工程质量保函 -->
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-card">
+                        <div class="product-header">
+                            <h5 class="product-title">工程质量保函</h5>
+                            <a href="#" class="more-link">更多</a>
+                        </div>
+                        <div class="product-badge">
+                            <span><i class="fas fa-clock"></i> 24H在线</span>
+                            <span><i class="fas fa-bolt"></i> 秒出函</span>
+                        </div>
+                        <p class="product-text">质量保函，也称为"维修保函"，是指货方或承建人申请，向买方或业主保证，如货物或工程的质量不符合合同约定卖方或承建人又不能依约更换或修理时，按买方或业主的索赔予以赔偿的书面文件</p>
+                        <button class="btn btn-primary w-100" onclick="openAIChat()">在线申请</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 企业简介 -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">企业简介</h2>
+            <div class="row align-items-center">
+                <div class="col-md-6" data-aos="fade-right">
+                    <div class="video-container">
+                        <video 
+                            id="companyVideo"
+                            controls 
+                            preload="auto"
+                            playsinline
+                            class="rounded">
+                            <source src="./imgs/video-poster.mp4" type="video/mp4">
+                            您的浏览器不支持视频播放。
+                        </video>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <p class="about-text">福建天和众诚科技发展有限公司是一家专业的中小企业数智金融解决方案提供商，公司响应国家发展数字金融号召，依托人工智能、区块链、云计算、大数据等前沿技术，围绕"智慧政务、普惠金融、数字信用、智能风控"四大领域，同时依托产学研合作、为央、国企政府部门、中小微企业、金融机构等提供专业、高效、智能、安全的产品与解决方案，用数字化转型应用助推企业高质量发展，致力于成为中国"未来金融"产业生态的领航者。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 平台优势 -->
+    <section id="advantages" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">平台优势</h2>
+            <div class="row">
+                <div class="col-md-3 text-center mb-4" data-aos="zoom-in">
+                    <div class="advantage-item">
+                        <i class="fas fa-laptop fa-3x mb-3"></i>
+                        <h4>操作简便</h4>
+                        <p>全流程线上化<br>方便快捷</p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center mb-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="advantage-item">
+                        <i class="fas fa-bolt fa-3x mb-3"></i>
+                        <h4>极速出函</h4>
+                        <p>投标保函<br>秒速可出</p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center mb-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="advantage-item">
+                        <i class="fas fa-piggy-bank fa-3x mb-3"></i>
+                        <h4>价格优惠</h4>
+                        <p>低于市场价<br>利率更优惠</p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center mb-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="advantage-item">
+                        <i class="fas fa-shield-alt fa-3x mb-3"></i>
+                        <h4>数据安全</h4>
+                        <p>源头数据加密<br>全���电子留痕</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">联系我们</h2>
+            <div class="row">
+                <div class="col-md-6" data-aos="fade-right">
+                    <!-- 联系我们表单部分 -->
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="userName" name="userName" placeholder="您的姓名" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="电子邮箱" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" id="userMessage" name="userMessage" rows="5" placeholder="请输入您的留言" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">提交留言</button>
+                    </form>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <div class="contact-info">
+                        <h4>联系方式</h4>
+                        <p><i class="fas fa-phone"></i> 电话：15059449408</p>
+                        <p><i class="fas fa-envelope"></i> 邮箱：791767844@qq.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 地址：贵州省安顺市开发区西航街道011科创二楼253-2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作伙伴 -->
+    <section id="partners" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">合作伙伴</h2>
+            <div class="partners-container">
+                <div class="partners-gradient-left"></div>
+                <div class="partners-image" data-aos="fade-up">
+                    <div class="partners-scroll-container">
+                        <img src="./imgs/partners.png" alt="合作伙伴" class="partners-scroll">
+                        <img src="./imgs/partners.png" alt="合作伙伴" class="partners-scroll">
+                    </div>
+                </div>
+                <div class="partners-gradient-right"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 电子保函综合服务平台. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 修改客服模块 -->
+    <div class="customer-service-wrapper">
+        <!-- 客服图标 -->
+        <div class="cs-icon">
+            <i class="fas fa-headset"></i>
+            <span>在线客服</span>
+        </div>
+        <!-- 客服详情面板 -->
+        <div class="customer-service">
+            <div class="cs-header">
+                <i class="fas fa-headset"></i> 在线客服
+            </div>
+            <div class="cs-content">
+                <p class="cs-time"><i class="far fa-clock"></i> 服务时间：工作日8:30-18:00</p>
+                <div class="cs-qr-codes">
+                    <div class="qr-item">
+                        <img src="./imgs/qr-official.jpg" alt="公众号二维码">
+                        <p>关注公众号</p>
+                    </div>
+                    <div class="qr-item">
+                        <img src="./imgs/qr-service.png" alt="客服微信二维码">
+                        <p>客服微信</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入脚本库 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="main.js"></script>
+</body>
+</html> 

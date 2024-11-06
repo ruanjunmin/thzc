@@ -1,0 +1,879 @@
+/* 全局样式 */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+}
+
+body {
+    font-family: 'Microsoft YaHei', sans-serif;
+    padding-top: 80px;
+    overflow-x: hidden;
+}
+
+/* 导航栏样式 */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1030;
+}
+
+/* AI聊天窗口样式修改 */
+.chat-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    width: 800px;
+    height: 700px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.chat-window.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.chat-header {
+    padding: 15px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #f8f9fa;
+}
+
+.chat-input {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    background: white;
+}
+
+.chat-input input {
+    height: 45px;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
+.chat-input button {
+    padding: 10px 25px;
+    font-size: 16px;
+    margin-left: 15px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* 消息样式 */
+.message {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 85%;
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+.user-message {
+    background: #e3f2fd;
+    margin-left: auto;
+    color: #0d47a1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.ai-message {
+    background: #f5f5f5;
+    margin-right: auto;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* AI消息中的段落样式 */
+.ai-message p {
+    margin-bottom: 10px;
+}
+
+/* AI消息中的列表样式 */
+.ai-message ul, .ai-message ol {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.ai-message li {
+    margin-bottom: 5px;
+}
+
+/* 强调文本样式 */
+.ai-message strong {
+    color: var(--primary-color);
+}
+
+/* 加载动画样式优化 */
+.loading {
+    position: relative;
+    min-width: 50px;
+    color: #666;
+    font-style: italic;
+}
+
+.loading:after {
+    content: '...';
+    position: absolute;
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+/* 轮播图样式调整 */
+.carousel-item {
+    height: 600px;
+    min-height: auto;
+    max-height: none;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+}
+
+/* 轮播控制按钮样式 */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    opacity: 0.8;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 50%;
+}
+
+/* 轮播指示器样式 */
+.carousel-indicators {
+    bottom: 20px;
+}
+
+.carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-color: rgba(255,255,255,0.8);
+}
+
+/* 产品卡片样式 */
+.card {
+    transition: transform 0.3s;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* 企业优势样式 */
+.advantage-item {
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    height: 100%;
+}
+
+.advantage-item i {
+    color: var(--primary-color);
+}
+
+/* 联系方式样式 */
+.contact-info {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.contact-info i {
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+/* 合作伙伴图片样式 */
+.partners-image {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 100%;
+    background: white;
+}
+
+.partners-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* 产品卡片新样式 */
+.product-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    height: 100%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.product-title {
+    margin: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.more-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.more-link:hover {
+    color: var(--primary-color);
+}
+
+.product-badge {
+    margin-bottom: 15px;
+}
+
+.product-badge span {
+    display: inline-block;
+    background: #f8f9fa;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-right: 10px;
+    font-size: 0.9em;
+    color: var(--primary-color);
+}
+
+.product-badge i {
+    margin-right: 5px;
+}
+
+.product-text {
+    flex-grow: 1;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: #666;
+}
+
+.product-card .btn {
+    margin-top: auto;
+}
+
+/* Logo 样式调整 */
+.navbar-brand img {
+    height: 50px;
+    width: auto;
+}
+
+/* 企业简介图片样式 */
+#about img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .carousel-item {
+        height: 400px;
+    }
+
+    .carousel-caption h1 {
+        font-size: 2rem;
+    }
+
+    .carousel-caption p {
+        font-size: 1.1rem;
+    }
+
+    #about img {
+        height: 300px;
+    }
+
+    .partner-logo {
+        height: 100px;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-item {
+        height: 300px;
+    }
+
+    .carousel-caption h1 {
+        font-size: 1.8rem;
+    }
+
+    #about img {
+        height: 250px;
+    }
+
+    .partner-logo {
+        height: 80px;
+    }
+}
+
+/* Logo 样式优化 */
+.navbar-brand {
+    padding: 5px 0;
+}
+
+.navbar-brand img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* 小屏幕上调整 logo 大小 */
+@media (max-width: 768px) {
+    .navbar-brand img {
+        height: 40px;
+    }
+}
+
+/* 视频容器样式优化 */
+.video-container {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background: transparent;
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+/* 视频控制器样式优化 */
+video::-webkit-media-controls {
+    background-color: rgba(0,0,0,0.5);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .video-container {
+        margin-bottom: 20px;
+    }
+}
+
+/* 企业简介文本样式 */
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    text-align: justify;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .about-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-top: 20px;
+    }
+}
+
+/* 添加遮罩层样式 */
+.chat-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.chat-overlay.active {
+    opacity: 1;
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+    .chat-window {
+        width: 90%;
+        max-width: 600px;
+        height: 80vh;
+    }
+}
+
+@media (max-width: 576px) {
+    .chat-window {
+        width: 95%;
+        height: 90vh;
+    }
+    
+    .chat-input {
+        padding: 15px;
+    }
+    
+    .chat-input input {
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .chat-input button {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+}
+
+/* 登录按钮式 */
+.btn-outline-primary {
+    border-width: 2px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 响应式调整 */
+@media (max-width: 991px) {
+    .navbar-nav .btn {
+        margin: 10px 0;
+        width: 100%;
+    }
+}
+
+/* 合作伙伴容器和动画样式 */
+.partners-container {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+    padding: 20px 0;
+    background: white;
+}
+
+.partners-gradient-left,
+.partners-gradient-right {
+    position: absolute;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.partners-gradient-left {
+    left: 0;
+    background: linear-gradient(to right, white 0%, rgba(255,255,255,0) 100%);
+}
+
+.partners-gradient-right {
+    right: 0;
+    background: linear-gradient(to left, white 0%, rgba(255,255,255,0) 100%);
+}
+
+.partners-image {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 0 100px;
+}
+
+.partners-scroll-container {
+    display: flex;
+    width: 200%;
+    animation: scrollPartners 30s linear infinite;
+}
+
+.partners-scroll {
+    width: 50%;
+    height: 150px;
+    object-fit: contain;
+}
+
+@keyframes scrollPartners {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* 移除鼠标悬停暂停效果 */
+.partners-scroll:hover {
+    animation-play-state: running;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .partners-gradient-left,
+    .partners-gradient-right {
+        width: 100px;
+    }
+    
+    .partners-image {
+        padding: 0 50px;
+    }
+    
+    .partners-scroll {
+        height: 100px;
+    }
+}
+
+/* 移除轮播图文字相关样式 */
+.carousel-caption {
+    display: none;
+}
+
+/* 滚动信息条样式修改 */
+.news-ticker {
+    position: relative;
+    z-index: 2;
+    background: #f8f9fa;
+    padding: 10px 0;
+    margin-bottom: 30px;
+}
+
+.news-ticker-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.news-ticker-wrapper {
+    display: flex;
+    width: 200%;
+    animation: tickerScroll 30s linear infinite;
+}
+
+.ticker-content {
+    flex: 0 0 50%;
+    display: flex;
+    white-space: nowrap;
+}
+
+@keyframes tickerScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* 信息项样式 */
+.ticker-item {
+    display: inline-block;
+    margin-right: 50px;
+    color: #666;
+}
+
+.ticker-item span {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* 客服模块包装器 */
+.customer-service-wrapper {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 900;
+}
+
+/* 客服图标样式 */
+.cs-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.cs-icon i {
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+.cs-icon span {
+    font-size: 12px;
+    display: none;
+}
+
+.cs-icon:hover {
+    width: 65px;
+    height: 65px;
+    background: #0056b3;
+}
+
+.cs-icon:hover span {
+    display: block;
+}
+
+/* 客服面板样式 */
+.customer-service {
+    position: absolute;
+    right: 80px;
+    bottom: 0;
+    width: 320px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+}
+
+/* 鼠标悬停时显示客服面板 */
+.customer-service-wrapper:hover .customer-service {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 客服面板内容样式 */
+.cs-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.cs-header i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.cs-content {
+    padding: 25px 20px;
+}
+
+.cs-time {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 14px;
+    padding: 8px 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.cs-time i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+/* 二维码区域样式 */
+.cs-qr-codes {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.qr-item {
+    text-align: center;
+    flex: 1;
+    background: #f8f9fa;
+    padding: 15px 10px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.qr-item:hover {
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+}
+
+.qr-item img {
+    width: 110px;
+    height: 110px;
+    border: none;
+    padding: 0;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: transform 0.3s ease;
+}
+
+.qr-item:hover img {
+    transform: scale(1.05);
+}
+
+.qr-item p {
+    margin: 0;
+    font-size: 13px;
+    color: #555;
+    font-weight: 500;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .customer-service {
+        width: 300px;
+        right: 70px;
+    }
+
+    .qr-item {
+        padding: 12px 8px;
+    }
+
+    .qr-item img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* 修改容器样式 */
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+/* 修改轮播图样式 */
+#home {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 30px;
+}
+
+/* 修改产品中心部分样式 */
+#products {
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    padding: 60px 0;
+    margin-top: 30px;
+}
+
+/* 修改其他部分的样式 */
+section {
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+}
+
+/* 聊天窗口头部按钮样式 */
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+/* 系统消息样式 */
+.system-message {
+    text-align: center;
+    background: #f8f9fa;
+    color: #666;
+    font-size: 0.9em;
+    padding: 8px 15px;
+    margin: 10px auto;
+    max-width: 80%;
+    border-radius: 15px;
+}
+
+/* 客服消息样式 */
+.customer-service-avatar {
+    width: 30px;
+    height: 30px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: 10px;
+    float: left;
+}
+
+.ai-message .message-content {
+    margin-left: 40px;
+}
+
+/* 管理登录按钮样式 */
+.btn-outline-secondary {
+    border-width: 2px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #6c757d;
+    color: white;
+}
+
+/* 响应式调整 */
+@media (max-width: 991px) {
+    .navbar-nav .btn {
+        margin: 10px 0;
+        width: 100%;
+    }
+}
